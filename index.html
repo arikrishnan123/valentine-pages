@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -63,10 +64,6 @@ button{
   box-shadow:0 14px 30px rgba(0,0,0,.2);
 }
 
-.l1{color:#ff2f7d;font-family:'Great Vibes';font-size:26px}
-.l2{color:#7c3aed;font-size:20px;animation:float 3s infinite}
-.l3{color:#0f766e;font-weight:800}
-.l4{color:#b91c1c;font-style:italic}
 .l5{color:black;font-size:24px;text-shadow:0 0 10px pink}
 
 @keyframes float{
@@ -74,14 +71,39 @@ button{
   50%{transform:translateY(-6px)}
   100%{transform:translateY(0)}
 }
+
+/* Gift grid */
+.giftGrid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:16px;
+  margin-top:20px;
+}
+
+.gift{
+  background:linear-gradient(135deg,#ff2f7d,#ff85a2);
+  color:white;
+  padding:18px;
+  border-radius:18px;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,.2);
+  transition:.3s;
+}
+
+.gift:hover{
+  transform:scale(1.05);
+}
 </style>
+
 </head>
 
 <body>
 
 <canvas id="confetti"></canvas>
 
-<!-- 1️⃣ LOGIN PAGE -->
+<!-- LOGIN PAGE -->
+
 <div class="card" id="loginPage">
   <h1>💌 Private Entry</h1><br>
   <input id="username" placeholder="Username 💕"><br><br>
@@ -89,7 +111,8 @@ button{
   <button class="primary" onclick="login()">Login 💖</button>
 </div>
 
-<!-- 2️⃣ WELCOME PAGE -->
+<!-- WELCOME PAGE -->
+
 <div class="card hidden" id="welcomePage">
   <div class="name">SriArishma 🖤</div>
   <h2>I have one question for you 💖</h2>
@@ -97,7 +120,8 @@ button{
   <button class="primary" onclick="goImage()">Yes 😍</button>
 </div>
 
-<!-- 3️⃣ IMAGE PAGE -->
+<!-- IMAGE PAGE -->
+
 <div class="card hidden" id="imagePage">
   <h1>Happy Together 🖤</h1>
   <img class="art" src="sriimage.jpeg"><br><br>
@@ -105,23 +129,56 @@ button{
   <button class="primary" onclick="goLove()">Next 💘</button>
 </div>
 
-<!-- 4️⃣ LOVE NOTES PAGE -->
+<!-- LOVE NOTES PAGE -->
+
 <div class="card hidden" id="lovePage">
   <h1>💖 My Love Notes 💖</h1><br>
-  <p class="15">ஆயிரம் பேர் என் அருகாமையில் இருந்தாலும்,
-என் கண்கள் அதிவிரைவாக தேடுவது
-உன்னை மட்டும் தா…🖤</p>
+  <p class="l5">ஆயிரம் பேர் என் அருகில் இருந்தாலும்,
+என் கண்கள் அதிவேகமாக தேடுவது
+உன்னை மட்டும் தா… 🖤</p>
+
   <p class="l5">முதல் பார்வையிலேயே இதயம் வரை சென்றுவிட்டாய்,
 மாதங்கள் பல கழிந்தும் என் காதல் தீராமல் காத்திருக்கிறது…
 உன் இதயத்தில் வாழப் போகும் அந்த ஒரு சில நிமிடங்களுக்காக…🖤</p>
+
   <p class="l5">ஆயிரம் சண்டைகள் போட்டிருந்தாலும்,
 ஒரு சண்டைக்காகவும் உன்னை விட்டுப் போக வேண்டும் என்று நினைத்ததில்லை…
 ஏனெனில், நீ எனக்கு அளவில்லாமல் பிடித்தவள்...🖤</p>
+
   <p class="l5">துயரங்களை கண்டு உடைந்து போனேன்,
 ஒரு நிமிடம் அல்ல…
 ஒரு கணம் உன்னுடன் பேசியதால்
 அனைத்து துயரங்களும் தொலைந்து போனது...🖤💫</p><br>
-  <button class="secondary" onclick="backToImage()">⬅ Previous</button>
+
+<button class="secondary" onclick="backToImage()">⬅ Previous</button> <button class="primary" onclick="goWeek()">Valentine Week 💝</button>
+
+</div>
+
+<!-- VALENTINE WEEK PAGE -->
+
+<div class="card hidden" id="weekPage">
+  <h1>💝 Valentine’s Week 💝</h1>
+  <div class="giftGrid">
+    <div class="gift" onclick="openDay('rose')">🌹 Rose Day</div>
+    <div class="gift" onclick="openDay('propose')">💍 Propose Day</div>
+    <div class="gift" onclick="openDay('chocolate')">🍫 Chocolate Day</div>
+    <div class="gift" onclick="openDay('teddy')">🧸 Teddy Day</div>
+    <div class="gift" onclick="openDay('promise')">🤝 Promise Day</div>
+    <div class="gift" onclick="openDay('hug')">🤗 Hug Day</div>
+    <div class="gift" onclick="openDay('kiss')">💋 Kiss Day</div>
+    <div class="gift" onclick="openDay('valentine')">❤️ Valentine’s Day</div>
+  </div>
+  <br>
+  <button class="secondary" onclick="backToLove()">⬅ Previous</button>
+</div>
+
+<!-- DAY DETAIL PAGE -->
+
+<div class="card hidden" id="dayPage">
+  <h1 id="dayTitle"></h1>
+  <img id="dayImage" class="art"><br><br>
+  <p class="l5" id="dayPoem"></p><br>
+  <button class="secondary" onclick="backToWeek()">⬅ Back</button>
 </div>
 
 <script>
@@ -153,6 +210,75 @@ function goLove(){
 function backToImage(){
   lovePage.classList.add("hidden");
   imagePage.classList.remove("hidden");
+}
+
+function goWeek(){
+  lovePage.classList.add("hidden");
+  weekPage.classList.remove("hidden");
+}
+
+function backToLove(){
+  weekPage.classList.add("hidden");
+  lovePage.classList.remove("hidden");
+}
+
+function backToWeek(){
+  dayPage.classList.add("hidden");
+  weekPage.classList.remove("hidden");
+}
+
+function openDay(day){
+  weekPage.classList.add("hidden");
+  dayPage.classList.remove("hidden");
+
+  const data={
+    rose:{
+      title:"🌹 Rose Day",
+      img:"https://images.unsplash.com/photo-1518709268805-4e9042af2176",
+      poem:"இந்த ரோஜா ஒரு பூ மட்டும் இல்லை… என் இதயம் உன்னிடம் கொடுக்கும் முதல் காதல் பரிசு… 🌹"
+    },
+    propose:{
+      title:"💍 Propose Day",
+      img:"https://images.unsplash.com/photo-1529333166437-7750a6dd5a70",
+      poem:"என் வாழ்க்கை முழுவதும் உன்னுடன் தான் இருக்கணும்… என் காதலை ஏற்றுக்கொள்வாயா? 💍"
+    },
+    chocolate:{
+      title:"🍫 Chocolate Day",
+      img:"https://images.unsplash.com/photo-1511389026070-a14ae610a1be",
+      poem:"இந்த சாக்லேட் போலே என் காதலும் இனிமையாக உன் வாழ்நாளெல்லாம் கரையட்டும்… 🍫"
+    },
+    teddy:{
+      title:"🧸 Teddy Day",
+      img:"https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308",
+      poem:"நான் அருகில் இல்லாத நேரங்களில் கூட, இந்த டெடி உன்னை என் மாதிரி அணைத்துக்கொள்ளட்டும்… 🧸"
+    },
+    promise:{
+      title:"🤝 Promise Day",
+      img:"https://images.unsplash.com/photo-1509099836639-18ba1795216d",
+      poem:"எத்தனை சண்டை வந்தாலும்… எத்தனை தூரம் சென்றாலும்… உன்னை விட்டுப் போக மாட்டேன் என்று சத்தியமாக சொல்றேன்… 🤝"
+    },
+    hug:{
+      title:"🤗 Hug Day",
+      img:"https://images.unsplash.com/photo-1516589091380-5d8e87df6999",
+      poem:"ஒரு அன்பான அணைப்பு… ஆயிரம் வார்த்தைகளைக் காட்டிலும் அதிகமாக காதலை உணர்த்தும்… 🤗"
+    },
+    kiss:{
+      title:"💋 Kiss Day",
+      img:"https://images.unsplash.com/photo-1495115905819-74a5c9fda2b5",
+      poem:"உன் நெற்றியில் ஒரு முத்தம்… என் வாழ்நாள் முழுவதும் உன்னை பாதுகாக்கும் என் காதலின் முத்திரை… 💋"
+    },
+    valentine:{
+      title:"❤️ Valentine’s Day",
+      img:"https://images.unsplash.com/photo-1518199266791-5375a83190b7",
+      poem:"உன் பெயரே என் இதயத்தின் துடிப்பு… உன் சிரிப்பே என் உலகத்தின் வெளிச்சம்… இன்று மட்டும் அல்ல, என் வாழ்நாள் முழுவதும் நீ தான் என் Valentine… ❤️"
+    }
+  };
+
+  dayTitle.innerText=data[day].title;
+  dayImage.src=data[day].img;
+  dayPoem.innerText=data[day].poem;
+
+  confettiInstance({particleCount:150,spread:120});
 }
 </script>
 
