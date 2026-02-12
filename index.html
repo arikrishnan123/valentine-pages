@@ -18,16 +18,20 @@ body{
   font-family:'Poppins',sans-serif;
   overflow:hidden;
 }
+
 canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
+
 .card{
-  width:min(750px,92vw);
-  background:rgba(255,255,255,.95);
+  width:min(720px,92vw);
+  background:rgba(255,255,255,.92);
   padding:28px;
   border-radius:26px;
   text-align:center;
   box-shadow:0 20px 60px rgba(0,0,0,.15);
 }
+
 .hidden{display:none}
+
 input{
   padding:14px;
   width:80%;
@@ -35,90 +39,106 @@ input{
   border:1px solid #ddd;
   font-size:16px;
 }
+
 button{
-  padding:12px 24px;
-  font-size:16px;
-  font-weight:700;
+  padding:14px 26px;
+  font-size:18px;
+  font-weight:800;
   border-radius:999px;
   border:none;
   cursor:pointer;
-  margin:5px;
+  box-shadow:0 10px 24px rgba(0,0,0,.2);
 }
+
 .primary{background:#ff2f7d;color:white}
 .secondary{background:#e5e7eb}
+
 .name{
   font-family:'Great Vibes',cursive;
-  font-size:60px;
+  font-size:64px;
   color:#ff2f7d;
 }
-.art,.slideImg{
-  width:100%;
-  max-height:400px;
-  object-fit:cover;
-  border-radius:20px;
-  box-shadow:0 15px 30px rgba(0,0,0,.25);
-}
-.l5{font-size:20px}
 
-/* gift grid */
+.art{
+  width:300px;
+  border-radius:22px;
+  box-shadow:0 14px 30px rgba(0,0,0,.2);
+}
+
+.l5{color:black;font-size:24px;text-shadow:0 0 10px pink}
+
+/* Gift grid */
 .giftGrid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-  gap:12px;
-  margin-top:15px;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:16px;
+  margin-top:20px;
 }
+
 .gift{
   background:linear-gradient(135deg,#ff2f7d,#ff85a2);
   color:white;
-  padding:15px;
-  border-radius:16px;
-  font-weight:700;
+  padding:18px;
+  border-radius:18px;
+  font-weight:800;
   cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,.2);
   transition:.3s;
 }
-.gift:hover{transform:scale(1.05)}
 
-/* heart rain */
+.gift:hover{
+  transform:scale(1.05);
+}
+
+/* Heart rain */
 .heart{
   position:fixed;
   top:-10px;
+  color:#ff2f7d;
   font-size:20px;
   animation:fall linear forwards;
+  z-index:1;
 }
+
 @keyframes fall{
-  to{transform:translateY(110vh);opacity:0;}
+  to{
+    transform:translateY(110vh);
+    opacity:0;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <audio id="bgMusic" loop>
-<source src="romantic.mp3" type="audio/mpeg">
+  <source src="romantic.mp3" type="audio/mpeg">
 </audio>
 
 <canvas id="confetti"></canvas>
 
-<!-- LOGIN -->
+<!-- LOGIN PAGE -->
 <div class="card" id="loginPage">
-<h1>💌 Private Entry</h1><br>
-<input id="username" placeholder="Username 💕"><br><br>
-<input id="password" type="password" placeholder="Password 🔒"><br><br>
-<button class="primary" onclick="login()">Login 💖</button>
+  <h1>💌 Private Entry</h1><br>
+  <input id="username" placeholder="Username 💕"><br><br>
+  <input id="password" type="password" placeholder="Password 🔒"><br><br>
+  <button class="primary" onclick="login()">Login 💖</button>
 </div>
 
-<!-- WELCOME -->
+<!-- WELCOME PAGE -->
 <div class="card hidden" id="welcomePage">
-<div class="name">Sriharishma 🖤</div>
-<h2>Will you be my Valentine?</h2><br>
-<button class="primary" onclick="goImage()">Yes 😍</button>
+  <div class="name">Sriharishma🖤</div>
+  <h2>I have one question for you 💖</h2>
+  <h1>Will you be my Valentine?🫴</h1><br>
+  <button class="primary" onclick="goImage()">Yes 😍</button>
 </div>
 
 <!-- IMAGE PAGE -->
 <div class="card hidden" id="imagePage">
-<h1>Happy Valentine's Day My Love 🖤</h1>
-<img src="sri1.jpg" class="art"><br><br>
-<button class="secondary" onclick="backToWelcome()">⬅ Previous</button>
-<button class="primary" onclick="goLove()">Next 💘</button>
+  <h1>Happy Valentine's Day My Love🖤✨</h1>
+  <img class="art" src="sriimage.jpeg"><br><br>
+  <button class="secondary" onclick="backToWelcome()">⬅ Previous</button>
+  <button class="primary" onclick="goLove()">Next 💘</button>
 </div>
 
 <!-- LOVE NOTES PAGE -->
@@ -150,7 +170,6 @@ button{
   <button class="primary" onclick="goWeek()">Valentine Week 💝</button>
 </div>
 
-
 <!-- SORRY PAGE -->
 <div class="card hidden" id="sorryPage">
   <h1>💔 A Small Sorry</h1><br>
@@ -160,86 +179,139 @@ button{
     அதுக்காக ஒரு பெரிய Sorry… 🖤
   </p>
   <p class="l5">
-    ஆனாலும் என் காதல் மட்டும் தினமும் உன்னோடே தான்… 💖
+    ஆனாலும் என் காதல் மட்டும் தினமும் உன்னோடே தான்… 🖤✨
   </p><br>
 
   <button class="secondary" onclick="backToWeekFromSorry()">⬅ Previous</button>
-  <button class="primary" onclick="goJourney()">Next 💖</button>
+  <button class="primary" onclick="goJourney()">Our Journey 🎥</button>
 </div>
 
-
-<!-- WEEK PAGE -->
+<!-- VALENTINE WEEK PAGE -->
 <div class="card hidden" id="weekPage">
-<h1>💝 Valentine’s Week 💝</h1>
-<div class="giftGrid">
-<div class="gift" onclick="openDay('rose')">🌹 Rose</div>
-<div class="gift" onclick="openDay('propose')">💍 Propose</div>
-<div class="gift" onclick="openDay('chocolate')">🍫 Chocolate</div>
-<div class="gift" onclick="openDay('teddy')">🧸 Teddy</div>
-<div class="gift" onclick="openDay('promise')">🤝 Promise</div>
-<div class="gift" onclick="openDay('hug')">🤗 Hug</div>
-<div class="gift" onclick="openDay('kiss')">💋 Kiss</div>
-<div class="gift" onclick="openDay('valentine')">❤️ Valentine</div>
-</div><br>
-<button class="secondary" onclick="backToSorry()">⬅ Previous</button>
-<button class="primary" onclick="goJourney()">Our Memories💖 📸</button>
+  <h1>💝 Valentine’s Week 💝</h1>
+  <div class="giftGrid">
+    <div class="gift" onclick="openDay('rose')">🌹 Rose Day</div>
+    <div class="gift" onclick="openDay('propose')">💍 Propose Day</div>
+    <div class="gift" onclick="openDay('chocolate')">🍫 Chocolate Day</div>
+    <div class="gift" onclick="openDay('teddy')">🧸 Teddy Day</div>
+    <div class="gift" onclick="openDay('promise')">🤝 Promise Day</div>
+    <div class="gift" onclick="openDay('hug')">🤗 Hug Day</div>
+    <div class="gift" onclick="openDay('kiss')">💋 Kiss Day</div>
+    <div class="gift" onclick="openDay('valentine')">❤️ Valentine’s Day</div>
+  </div>
+  <br>
+  <button class="secondary" onclick="backToLove()">⬅ Previous</button>
+  <button class="primary" onclick="goSorry()">Next 💌</button>
 </div>
 
-<!-- DAY DETAIL -->
-<div class="card hidden" id="dayPage">
-<h1 id="dayTitle"></h1>
-<img id="dayImage" class="art"><br><br>
-<p class="l5" id="dayPoem"></p>
-<button class="secondary" onclick="backToWeek()">⬅ Back</button>
-</div>
 
-<!-- SLIDESHOW -->
+<!-- OUR JOURNEY PAGE -->
 <div class="card hidden" id="journeyPage">
-<h1>📸 Our Memories</h1>
-<img id="slide" class="slideImg"><br><br>
-<button class="secondary" onclick="backToWeek()">⬅ Previous</button>
-<button class="primary" onclick="goFinal()">Final ❤️</button>
+  <h1>🎥 Our Journey 🖤</h1><br>
+  <video width="100%" controls autoplay loop>
+    <source src="journey.mp4" type="video/mp4">
+  </video><br><br>
+  <button class="secondary" onclick="backToSorry()">⬅ Previous</button>
 </div>
 
-<!-- FINAL PAGE -->
-<div class="card hidden" id="finalPage">
-<h1>❤️ I Love You Forever ❤️</h1>
-<img src="sri1.jpg" class="slideImg"><br><br>
-<p class="l5">என் வாழ்நாள் முழுவதும் unnodu தான்… 🖤</p>
-<button class="secondary" onclick="backToJourney()">⬅ Previous</button>
+<!-- DAY DETAIL PAGE -->
+<div class="card hidden" id="dayPage">
+  <h1 id="dayTitle"></h1>
+  <img id="dayImage" class="art"><br><br>
+  <p class="l5" id="dayPoem"></p><br>
+  <button class="secondary" onclick="backToWeek()">⬅ Back</button>
 </div>
 
 <script>
 const confettiInstance=confetti.create(document.getElementById("confetti"),{resize:true});
 const music=document.getElementById("bgMusic");
 
-let slideInterval,currentSlide=1;
-
-/* LOGIN */
+/* login */
 function login(){
-if(username.value==="sri" && password.value==="love"){
-loginPage.classList.add("hidden");
-welcomePage.classList.remove("hidden");
-music.play();
-startHeartRain();
-}else alert("Wrong login 😈");
+  if(username.value==="sri" && password.value==="love"){
+    loginPage.classList.add("hidden");
+    welcomePage.classList.remove("hidden");
+    music.play();
+    startHeartRain();
+  }else alert("Wrong login 😈");
 }
 
-function goImage(){welcomePage.classList.add("hidden");imagePage.classList.remove("hidden");}
-function backToWelcome(){imagePage.classList.add("hidden");welcomePage.classList.remove("hidden");}
-function goLove(){imagePage.classList.add("hidden");lovePage.classList.remove("hidden");}
-function backToImage(){lovePage.classList.add("hidden");imagePage.classList.remove("hidden");}
-function goSorry(){lovePage.classList.add("hidden");sorryPage.classList.remove("hidden");}
-function backToLove(){sorryPage.classList.add("hidden");lovePage.classList.remove("hidden");}
-function goWeek(){sorryPage.classList.add("hidden");weekPage.classList.remove("hidden");}
-function backToSorry(){weekPage.classList.add("hidden");sorryPage.classList.remove("hidden");}
-function backToWeek(){dayPage.classList.add("hidden");journeyPage.classList.add("hidden");weekPage.classList.remove("hidden");clearInterval(slideInterval);}
+function goImage(){
+  welcomePage.classList.add("hidden");
+  imagePage.classList.remove("hidden");
+  confettiInstance({particleCount:250,spread:160});
+}
 
-/* DAY DATA */
+function backToWelcome(){
+  imagePage.classList.add("hidden");
+  welcomePage.classList.remove("hidden");
+}
+
+function goLove(){
+  imagePage.classList.add("hidden");
+  lovePage.classList.remove("hidden");
+}
+
+function backToImage(){
+  lovePage.classList.add("hidden");
+  imagePage.classList.remove("hidden");
+}
+
+function goWeek(){
+  lovePage.classList.add("hidden");
+  weekPage.classList.remove("hidden");
+}
+
+function backToLove(){
+  weekPage.classList.add("hidden");
+  lovePage.classList.remove("hidden");
+}
+
+/* Sorry & Journey */
+function goSorry(){
+  weekPage.classList.add("hidden");
+  sorryPage.classList.remove("hidden");
+}
+
+function backToWeekFromSorry(){
+  sorryPage.classList.add("hidden");
+  weekPage.classList.remove("hidden");
+}
+
+function goJourney(){
+  sorryPage.classList.add("hidden");
+  journeyPage.classList.remove("hidden");
+}
+
+function backToSorry(){
+  journeyPage.classList.add("hidden");
+  sorryPage.classList.remove("hidden");
+}
+
+function backToWeek(){
+  dayPage.classList.add("hidden");
+  weekPage.classList.remove("hidden");
+}
+
+/* Heart rain */
+function startHeartRain(){
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerText="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  },300);
+}
+
+/* Day data */
 function openDay(day){
-weekPage.classList.add("hidden");
-dayPage.classList.remove("hidden");
-const data={
+  weekPage.classList.add("hidden");
+  dayPage.classList.remove("hidden");
+
+  const data={
     rose:{
       title:"🌹 Rose Day",img:"rose.jpg",
       poem:"இந்த ரோஜா ஒரு பூ மட்டும் இல்லை… என் இதயம் உன்னிடம் கொடுக்கும் முதல் காதல் பரிசு… 🌹"},
@@ -265,51 +337,16 @@ const data={
       title:"❤️ Valentine’s Day",img:"valentines.jpg",
       poem:"உன் பெயரே என் இதயத்தின் துடிப்பு… உன் சிரிப்பே என் உலகத்தின் வெளிச்சம்… இன்று மட்டும் அல்ல, என் வாழ்நாள் முழுவதும் நீ தான் என் Valentine… ❤️"}
   };
-dayTitle.innerText=data[day].title;
-dayImage.src=data[day].img;
-dayPoem.innerText=data[day].poem;
-confettiInstance({particleCount:150,spread:120});
-}
 
-/* SLIDESHOW */
-function goJourney(){
-weekPage.classList.add("hidden");
-journeyPage.classList.remove("hidden");
-startSlideshow();
-}
-function startSlideshow(){
-currentSlide=1;
-slide.src="sri1.jpg";
-slideInterval=setInterval(()=>{
-currentSlide++;
-if(currentSlide>14) currentSlide=1;
-slide.src="sri"+currentSlide+".jpg";
-},2500);
-}
-function goFinal(){
-clearInterval(slideInterval);
-journeyPage.classList.add("hidden");
-finalPage.classList.remove("hidden");
-confettiInstance({particleCount:300,spread:180});
-}
-function backToJourney(){
-finalPage.classList.add("hidden");
-journeyPage.classList.remove("hidden");
-startSlideshow();
-}
+  dayTitle.innerText=data[day].title;
+  dayImage.src=data[day].img;
+  dayPoem.innerText=data[day].poem;
 
-/* HEART RAIN */
-function startHeartRain(){
-setInterval(()=>{
-const heart=document.createElement("div");
-heart.className="heart";
-heart.innerText="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(3+Math.random()*3)+"s";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),6000);
-},300);
+  confettiInstance({particleCount:150,spread:120});
 }
 </script>
+
 </body>
 </html>
+macha journey page la video ku bathila more than 15 images ah slideshown pannaum athum automatic and manual ah slideshown aganum aprm sorry page valentines week ku munnadi ku vaikanum aprm final page la oru image add pannanum aprm antha page la previous page ku pora button vaikanum extra itha add pannu machi aprm full code without change la venum
+
