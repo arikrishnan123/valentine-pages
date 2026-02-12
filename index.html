@@ -20,6 +20,24 @@ body{
 }
 canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
 
+/* ❤️ Heart rain */
+.hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:1;
+}
+.heart{
+  position:absolute;
+  color:#ff2f7d;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-10%);opacity:1}
+  100%{transform:translateY(110vh);opacity:0}
+}
+
 .card{
   width:min(720px,92vw);
   background:rgba(255,255,255,.92);
@@ -27,6 +45,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
   border-radius:26px;
   text-align:center;
   box-shadow:0 20px 60px rgba(0,0,0,.15);
+  z-index:2;
 }
 
 .hidden{display:none}
@@ -66,12 +85,6 @@ button{
 
 .l5{color:black;font-size:24px;text-shadow:0 0 10px pink}
 
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-
 /* Gift grid */
 .giftGrid{
   display:grid;
@@ -90,10 +103,7 @@ button{
   box-shadow:0 10px 20px rgba(0,0,0,.2);
   transition:.3s;
 }
-
-.gift:hover{
-  transform:scale(1.05);
-}
+.gift:hover{transform:scale(1.05)}
 </style>
 
 </head>
@@ -101,6 +111,14 @@ button{
 <body>
 
 <canvas id="confetti"></canvas>
+
+<div class="hearts" id="hearts"></div>
+
+<!-- 🎵 Background Music -->
+
+<audio id="bgMusic" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
 
 <!-- LOGIN PAGE -->
 
@@ -136,22 +154,9 @@ button{
   <p class="l5">ஆயிரம் பேர் என் அருகில் இருந்தாலும்,
 என் கண்கள் அதிவேகமாக தேடுவது
 உன்னை மட்டும் தா… 🖤</p>
-
-  <p class="l5">முதல் பார்வையிலேயே இதயம் வரை சென்றுவிட்டாய்,
-மாதங்கள் பல கழிந்தும் என் காதல் தீராமல் காத்திருக்கிறது…
-உன் இதயத்தில் வாழப் போகும் அந்த ஒரு சில நிமிடங்களுக்காக…🖤</p>
-
-  <p class="l5">ஆயிரம் சண்டைகள் போட்டிருந்தாலும்,
-ஒரு சண்டைக்காகவும் உன்னை விட்டுப் போக வேண்டும் என்று நினைத்ததில்லை…
-ஏனெனில், நீ எனக்கு அளவில்லாமல் பிடித்தவள்...🖤</p>
-
-  <p class="l5">துயரங்களை கண்டு உடைந்து போனேன்,
-ஒரு நிமிடம் அல்ல…
-ஒரு கணம் உன்னுடன் பேசியதால்
-அனைத்து துயரங்களும் தொலைந்து போனது...🖤💫</p><br>
-
-<button class="secondary" onclick="backToImage()">⬅ Previous</button> <button class="primary" onclick="goWeek()">Valentine Week 💝</button>
-
+<br>
+  <button class="secondary" onclick="backToImage()">⬅ Previous</button>
+  <button class="primary" onclick="goWeek()">Valentine Week 💝</button>
 </div>
 
 <!-- VALENTINE WEEK PAGE -->
@@ -184,49 +189,54 @@ button{
 <script>
 const confettiInstance=confetti.create(document.getElementById("confetti"),{resize:true});
 
+/* Login */
 function login(){
   if(username.value==="sri" && password.value==="love"){
     loginPage.classList.add("hidden");
     welcomePage.classList.remove("hidden");
+    startMusic();
   }else alert("Wrong login 😈");
 }
 
+/* Music */
+function startMusic(){
+  const music=document.getElementById("bgMusic");
+  music.volume=0.5;
+  music.play();
+}
+
+/* Navigation */
 function goImage(){
   welcomePage.classList.add("hidden");
   imagePage.classList.remove("hidden");
   confettiInstance({particleCount:250,spread:160});
 }
-
 function backToWelcome(){
   imagePage.classList.add("hidden");
   welcomePage.classList.remove("hidden");
 }
-
 function goLove(){
   imagePage.classList.add("hidden");
   lovePage.classList.remove("hidden");
 }
-
 function backToImage(){
   lovePage.classList.add("hidden");
   imagePage.classList.remove("hidden");
 }
-
 function goWeek(){
   lovePage.classList.add("hidden");
   weekPage.classList.remove("hidden");
 }
-
 function backToLove(){
   weekPage.classList.add("hidden");
   lovePage.classList.remove("hidden");
 }
-
 function backToWeek(){
   dayPage.classList.add("hidden");
   weekPage.classList.remove("hidden");
 }
 
+/* Day content */
 function openDay(day){
   weekPage.classList.add("hidden");
   dayPage.classList.remove("hidden");
@@ -234,43 +244,43 @@ function openDay(day){
   const data={
     rose:{
       title:"🌹 Rose Day",
-      img:"https://images.unsplash.com/photo-1518709268805-4e9042af2176",
-      poem:"இந்த ரோஜா ஒரு பூ மட்டும் இல்லை… என் இதயம் உன்னிடம் கொடுக்கும் முதல் காதல் பரிசு… 🌹"
+      img:"https://images.unsplash.com/photo-1490750967868-88aa4486c946",
+      poem:"இந்த ரோஜா என் காதலின் முதல் சின்னம்… 🌹"
     },
     propose:{
       title:"💍 Propose Day",
       img:"https://images.unsplash.com/photo-1529333166437-7750a6dd5a70",
-      poem:"என் வாழ்க்கை முழுவதும் உன்னுடன் தான் இருக்கணும்… என் காதலை ஏற்றுக்கொள்வாயா? 💍"
+      poem:"என் வாழ்நாள் முழுவதும் உன்னுடன் இருக்கணும்… 💍"
     },
     chocolate:{
       title:"🍫 Chocolate Day",
-      img:"https://images.unsplash.com/photo-1511389026070-a14ae610a1be",
-      poem:"இந்த சாக்லேட் போலே என் காதலும் இனிமையாக உன் வாழ்நாளெல்லாம் கரையட்டும்… 🍫"
+      img:"https://images.unsplash.com/photo-1548907040-4baa42d10919",
+      poem:"சாக்லேட் போல இனிமையான என் காதல் உனக்காக… 🍫"
     },
     teddy:{
       title:"🧸 Teddy Day",
       img:"https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308",
-      poem:"நான் அருகில் இல்லாத நேரங்களில் கூட, இந்த டெடி உன்னை என் மாதிரி அணைத்துக்கொள்ளட்டும்… 🧸"
+      poem:"நான் இல்லாத நேரங்களில் இந்த டெடி உன்னை அணைக்கட்டும்… 🧸"
     },
     promise:{
       title:"🤝 Promise Day",
       img:"https://images.unsplash.com/photo-1509099836639-18ba1795216d",
-      poem:"எத்தனை சண்டை வந்தாலும்… எத்தனை தூரம் சென்றாலும்… உன்னை விட்டுப் போக மாட்டேன் என்று சத்தியமாக சொல்றேன்… 🤝"
+      poem:"எத்தனை சண்டை வந்தாலும் உன்னை விட்டுப் போக மாட்டேன்… 🤝"
     },
     hug:{
       title:"🤗 Hug Day",
       img:"https://images.unsplash.com/photo-1516589091380-5d8e87df6999",
-      poem:"ஒரு அன்பான அணைப்பு… ஆயிரம் வார்த்தைகளைக் காட்டிலும் அதிகமாக காதலை உணர்த்தும்… 🤗"
+      poem:"ஒரு அணைப்பு… ஆயிரம் வார்த்தைகளின் காதல்… 🤗"
     },
     kiss:{
       title:"💋 Kiss Day",
       img:"https://images.unsplash.com/photo-1495115905819-74a5c9fda2b5",
-      poem:"உன் நெற்றியில் ஒரு முத்தம்… என் வாழ்நாள் முழுவதும் உன்னை பாதுகாக்கும் என் காதலின் முத்திரை… 💋"
+      poem:"ஒரு முத்தம்… என் காதலின் முத்திரை… 💋"
     },
     valentine:{
       title:"❤️ Valentine’s Day",
       img:"https://images.unsplash.com/photo-1518199266791-5375a83190b7",
-      poem:"உன் பெயரே என் இதயத்தின் துடிப்பு… உன் சிரிப்பே என் உலகத்தின் வெளிச்சம்… இன்று மட்டும் அல்ல, என் வாழ்நாள் முழுவதும் நீ தான் என் Valentine… ❤️"
+      poem:"என் வாழ்நாள் முழுவதும் நீ தான் என் Valentine… ❤️"
     }
   };
 
@@ -280,6 +290,20 @@ function openDay(day){
 
   confettiInstance({particleCount:150,spread:120});
 }
+
+/* Heart rain */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+2)+"s";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+  document.getElementById("hearts").appendChild(heart);
+
+  setTimeout(()=>{heart.remove();},5000);
+}
+setInterval(createHeart,300);
 </script>
 
 </body>
