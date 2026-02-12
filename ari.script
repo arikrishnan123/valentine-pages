@@ -1,0 +1,19 @@
+function goSorry(){
+  weekPage.classList.add("hidden");
+  sorryPage.classList.remove("hidden");
+}
+
+function backToWeek(){
+  sorryPage.classList.add("hidden");
+  weekPage.classList.remove("hidden");
+}
+
+function goJourney(){
+  sorryPage.classList.add("hidden");
+  journeyPage.classList.remove("hidden");
+}
+
+function backToSorry(){
+  journeyPage.classList.add("hidden");
+  sorryPage.classList.remove("hidden");
+}
