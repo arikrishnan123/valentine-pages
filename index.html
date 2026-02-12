@@ -20,8 +20,8 @@ body{
 }
 canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
 .card{
-  width:min(720px,92vw);
-  background:rgba(255,255,255,.92);
+  width:min(750px,92vw);
+  background:rgba(255,255,255,.95);
   padding:28px;
   border-radius:26px;
   text-align:center;
@@ -29,52 +29,67 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
 }
 .hidden{display:none}
 input{
-  padding:14px;width:80%;
-  border-radius:14px;border:1px solid #ddd;
+  padding:14px;
+  width:80%;
+  border-radius:14px;
+  border:1px solid #ddd;
   font-size:16px;
 }
 button{
-  padding:14px 26px;font-size:18px;
-  font-weight:800;border-radius:999px;
-  border:none;cursor:pointer;
-  box-shadow:0 10px 24px rgba(0,0,0,.2);
+  padding:12px 24px;
+  font-size:16px;
+  font-weight:700;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  margin:5px;
 }
 .primary{background:#ff2f7d;color:white}
 .secondary{background:#e5e7eb}
 .name{
   font-family:'Great Vibes',cursive;
-  font-size:64px;color:#ff2f7d;
+  font-size:60px;
+  color:#ff2f7d;
 }
-.art{
-  width:300px;border-radius:22px;
-  box-shadow:0 14px 30px rgba(0,0,0,.2);
+.art,.slideImg{
+  width:100%;
+  max-height:400px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 15px 30px rgba(0,0,0,.25);
 }
-.l5{color:black;font-size:22px;text-shadow:0 0 10px pink}
+.l5{font-size:20px}
+
+/* gift grid */
 .giftGrid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:16px;margin-top:20px;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:12px;
+  margin-top:15px;
 }
 .gift{
   background:linear-gradient(135deg,#ff2f7d,#ff85a2);
-  color:white;padding:18px;border-radius:18px;
-  font-weight:800;cursor:pointer;
-  box-shadow:0 10px 20px rgba(0,0,0,.2);
+  color:white;
+  padding:15px;
+  border-radius:16px;
+  font-weight:700;
+  cursor:pointer;
   transition:.3s;
 }
-.gift:hover{transform:scale(1.05);}
+.gift:hover{transform:scale(1.05)}
+
+/* heart rain */
 .heart{
-  position:fixed;top:-10px;
-  color:#ff2f7d;font-size:20px;
+  position:fixed;
+  top:-10px;
+  font-size:20px;
   animation:fall linear forwards;
-  z-index:1;
 }
 @keyframes fall{
   to{transform:translateY(110vh);opacity:0;}
 }
 </style>
 </head>
-
 <body>
 
 <audio id="bgMusic" loop>
@@ -93,16 +108,15 @@ button{
 
 <!-- WELCOME -->
 <div class="card hidden" id="welcomePage">
-<div class="name">SRIHARISHMA 🖤</div>
-<h2>I have one question for you 💖</h2>
-<h1>Will you be my Valentine?</h1><br>
+<div class="name">Sriharishma 🖤</div>
+<h2>Will you be my Valentine?</h2><br>
 <button class="primary" onclick="goImage()">Yes 😍</button>
 </div>
 
-<!-- IMAGE -->
+<!-- IMAGE PAGE -->
 <div class="card hidden" id="imagePage">
-<h1>Happy Valentine's Day My Love🖤</h1>
-<img class="art" src="sriimage.jpeg"><br><br>
+<h1>Happy Valentine's Day My Love 🖤</h1>
+<img src="sri1.jpg" class="art"><br><br>
 <button class="secondary" onclick="backToWelcome()">⬅ Previous</button>
 <button class="primary" onclick="goLove()">Next 💘</button>
 </div>
@@ -150,55 +164,56 @@ button{
   </p><br>
 
   <button class="secondary" onclick="backToWeekFromSorry()">⬅ Previous</button>
-  <button class="primary" onclick="goJourney()">Our Journey 🎥</button>
+  <button class="primary" onclick="goJourney()">Next 💖</button>
 </div>
 
 
-<!-- WEEK -->
+<!-- WEEK PAGE -->
 <div class="card hidden" id="weekPage">
 <h1>💝 Valentine’s Week 💝</h1>
 <div class="giftGrid">
-<div class="gift" onclick="openDay('rose')">🌹 Rose Day</div>
-<div class="gift" onclick="openDay('propose')">💍 Propose Day</div>
-<div class="gift" onclick="openDay('chocolate')">🍫 Chocolate Day</div>
-<div class="gift" onclick="openDay('teddy')">🧸 Teddy Day</div>
-<div class="gift" onclick="openDay('promise')">🤝 Promise Day</div>
-<div class="gift" onclick="openDay('hug')">🤗 Hug Day</div>
-<div class="gift" onclick="openDay('kiss')">💋 Kiss Day</div>
-<div class="gift" onclick="openDay('valentine')">❤️ Valentine’s Day</div>
+<div class="gift" onclick="openDay('rose')">🌹 Rose</div>
+<div class="gift" onclick="openDay('propose')">💍 Propose</div>
+<div class="gift" onclick="openDay('chocolate')">🍫 Chocolate</div>
+<div class="gift" onclick="openDay('teddy')">🧸 Teddy</div>
+<div class="gift" onclick="openDay('promise')">🤝 Promise</div>
+<div class="gift" onclick="openDay('hug')">🤗 Hug</div>
+<div class="gift" onclick="openDay('kiss')">💋 Kiss</div>
+<div class="gift" onclick="openDay('valentine')">❤️ Valentine</div>
 </div><br>
 <button class="secondary" onclick="backToSorry()">⬅ Previous</button>
-<button class="primary" onclick="goJourney()">Our Journey 🎞</button>
+<button class="primary" onclick="goJourney()">Our Memories💖 📸</button>
 </div>
 
-<!-- DAY PAGE -->
+<!-- DAY DETAIL -->
 <div class="card hidden" id="dayPage">
 <h1 id="dayTitle"></h1>
 <img id="dayImage" class="art"><br><br>
-<p class="l5" id="dayPoem"></p><br>
+<p class="l5" id="dayPoem"></p>
 <button class="secondary" onclick="backToWeek()">⬅ Back</button>
 </div>
 
-<!-- JOURNEY SLIDESHOW -->
+<!-- SLIDESHOW -->
 <div class="card hidden" id="journeyPage">
-<h1>🎞 Our Journey 🖤</h1><br>
-<img id="slideImage" class="art"><br><br>
-<button class="secondary" onclick="prevSlide()">⬅ Prev</button>
-<button class="secondary" onclick="nextSlide()">Next ➡</button>
-<br><br>
-<button class="primary" onclick="goFinal()">Final Surprise 💖</button>
+<h1>📸 Our Memories</h1>
+<img id="slide" class="slideImg"><br><br>
+<button class="secondary" onclick="backToWeek()">⬅ Previous</button>
+<button class="primary" onclick="goFinal()">Final ❤️</button>
 </div>
 
-<!-- FINAL -->
+<!-- FINAL PAGE -->
 <div class="card hidden" id="finalPage">
-<h1>Forever With You 🖤</h1><br>
-<img src="sri1.jpg" class="art"><br><br>
+<h1>❤️ I Love You Forever ❤️</h1>
+<img src="sri1.jpg" class="slideImg"><br><br>
+<p class="l5">என் வாழ்நாள் முழுவதும் unnodu தான்… 🖤</p>
 <button class="secondary" onclick="backToJourney()">⬅ Previous</button>
 </div>
 
 <script>
 const confettiInstance=confetti.create(document.getElementById("confetti"),{resize:true});
 const music=document.getElementById("bgMusic");
+
+let slideInterval,currentSlide=1;
 
 /* LOGIN */
 function login(){
@@ -218,30 +233,13 @@ function goSorry(){lovePage.classList.add("hidden");sorryPage.classList.remove("
 function backToLove(){sorryPage.classList.add("hidden");lovePage.classList.remove("hidden");}
 function goWeek(){sorryPage.classList.add("hidden");weekPage.classList.remove("hidden");}
 function backToSorry(){weekPage.classList.add("hidden");sorryPage.classList.remove("hidden");}
-function goJourney(){weekPage.classList.add("hidden");journeyPage.classList.remove("hidden");startSlideshow();}
-function goFinal(){journeyPage.classList.add("hidden");finalPage.classList.remove("hidden");}
-function backToJourney(){finalPage.classList.add("hidden");journeyPage.classList.remove("hidden");}
-function backToWeek(){dayPage.classList.add("hidden");weekPage.classList.remove("hidden");}
+function backToWeek(){dayPage.classList.add("hidden");journeyPage.classList.add("hidden");weekPage.classList.remove("hidden");clearInterval(slideInterval);}
 
-/* HEART RAIN */
-function startHeartRain(){
-setInterval(()=>{
-const heart=document.createElement("div");
-heart.className="heart";
-heart.innerText="💖";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(3+Math.random()*3)+"s";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),6000);
-},300);
-}
-
-/* DAY DETAILS */
+/* DAY DATA */
 function openDay(day){
 weekPage.classList.add("hidden");
 dayPage.classList.remove("hidden");
-
-  const data={
+const data={
     rose:{
       title:"🌹 Rose Day",img:"rose.jpg",
       poem:"இந்த ரோஜா ஒரு பூ மட்டும் இல்லை… என் இதயம் உன்னிடம் கொடுக்கும் முதல் காதல் பரிசு… 🌹"},
@@ -267,25 +265,51 @@ dayPage.classList.remove("hidden");
       title:"❤️ Valentine’s Day",img:"valentines.jpg",
       poem:"உன் பெயரே என் இதயத்தின் துடிப்பு… உன் சிரிப்பே என் உலகத்தின் வெளிச்சம்… இன்று மட்டும் அல்ல, என் வாழ்நாள் முழுவதும் நீ தான் என் Valentine… ❤️"}
   };
-
 dayTitle.innerText=data[day].title;
 dayImage.src=data[day].img;
 dayPoem.innerText=data[day].poem;
-
 confettiInstance({particleCount:150,spread:120});
 }
 
 /* SLIDESHOW */
-const slides=[];
-for(let i=1;i<=15;i++){slides.push("journey"+i+".jpg");}
-let currentSlide=0;
-let slideInterval;
+function goJourney(){
+weekPage.classList.add("hidden");
+journeyPage.classList.remove("hidden");
+startSlideshow();
+}
+function startSlideshow(){
+currentSlide=1;
+slide.src="sri1.jpg";
+slideInterval=setInterval(()=>{
+currentSlide++;
+if(currentSlide>14) currentSlide=1;
+slide.src="sri"+currentSlide+".jpg";
+},2500);
+}
+function goFinal(){
+clearInterval(slideInterval);
+journeyPage.classList.add("hidden");
+finalPage.classList.remove("hidden");
+confettiInstance({particleCount:300,spread:180});
+}
+function backToJourney(){
+finalPage.classList.add("hidden");
+journeyPage.classList.remove("hidden");
+startSlideshow();
+}
 
-function showSlide(){slideImage.src=slides[currentSlide];}
-function nextSlide(){currentSlide=(currentSlide+1)%slides.length;showSlide();}
-function prevSlide(){currentSlide=(currentSlide-1+slides.length)%slides.length;showSlide();}
-function startSlideshow(){showSlide();clearInterval(slideInterval);slideInterval=setInterval(nextSlide,3000);}
+/* HEART RAIN */
+function startHeartRain(){
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerText="💖";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(3+Math.random()*3)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},300);
+}
 </script>
-
 </body>
 </html>
